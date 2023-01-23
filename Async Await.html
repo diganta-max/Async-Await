@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    console.log('Person 1: Let\'s plan a trip to Manali together!');
+console.log('Person 2: Sounds great, let\'s start planning.');
+
+const bookHotel = async () => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log(`Booked a hotel in Manali successfully!`);
+      resolve();
+    }, 2000);
+  });
+};
+
+const bookFlight = async (from,to) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      console.log(`Booked a flight from ${from} to ${to} successfully!`);
+      resolve();
+    }, 2000);
+  });
+};
+
+const planTrip = async (from,to) => {
+
+  const promises = [
+    new Promise((resolve) => setTimeout(() => resolve('Itinerary'), 3000)),
+    new Promise((resolve) => setTimeout(() => resolve('Travel Insurance'), 3000)),
+  ];
+
+  let [itinerary, insurance] = await Promise.all(promises);
+
+  console.log(`Person 1: Got the ${itinerary}, let's start packing.`);
+  console.log(`Person 2: Don't forget to get ${insurance} before we leave.`);
+
+  await bookHotel();
+  await bookFlight(from,to);
+  console.log("All done! Let's enjoy the trip.");
+};
+
+console.log('Person 3: I am also joining the trip, let me check my availability.');
+planTrip('New York','Manali').then(() => console.log(`Person 3: I am available, let's go!`));
+
+</script>
+</html>
